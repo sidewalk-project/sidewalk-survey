@@ -37,11 +37,10 @@ const Question3 = ({ previousStep, nextStep, updateAnswers, stepNumber, setSingl
     updateAnswers('mobilityAidOptions', { mobilityAidOptions: orderedSelectedOptions });
     updateAnswers('professionalRole', orderedSelectedOptions);
 
+    updateAnswers('mobilityAid', orderedSelectedOptions[0]);
+
     if (orderedSelectedOptions.length === 1) {
-      updateAnswers('mobilityAid', orderedSelectedOptions[0]);
       setSingleMobilityAid(true);
-    } else {
-      updateAnswers('mobilityAid', '');
     }
 
     setNextStepReady(true);

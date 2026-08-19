@@ -8,7 +8,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Question1 from '../Questions/Question1';
 import Question2 from '../Questions/Question2';
 import Question3 from '../Questions/Question3';
-import Question4 from '../Questions/Question4';
 import Question5 from '../Questions/Question5';
 import DemographicQuestions from '../Questions/DemographicQuestions';
 import ImageSelection from '../ImageSelection/ImageSelection';
@@ -46,9 +45,9 @@ const analytics = getAnalytics(app);
 
 const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || 'surveyResponses';
 
-const TOTAL_STEPS = 39;
-const MOBILITYAID_STEP = 6;
-const IMAGE_STEP = 9;
+const TOTAL_STEPS = 38;
+const MOBILITYAID_STEP = 5;
+const IMAGE_STEP = 8;
 const STEPS_PER_GROUP = 3;
 const GROUP_ORDER = ['group0', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8'];
 const shuffledGroupOrder = shuffleArray([...GROUP_ORDER]);
@@ -358,9 +357,7 @@ const nextStep = () => {
 };
 
 const previousStep = () => {
-  if (currentStep === 6 && singleMobilityAid) {
-    setCurrentStep(4); // Skip to Question 3 if singleMobilityAid is true
-  } else if (currentStep > 1) {
+  if (currentStep > 1) {
     setCurrentStep(currentStep - 1);
   }
 };
@@ -401,13 +398,7 @@ const previousStep = () => {
           newErrors.mobilityAidOptions = 'Please select at least one option';
         }
         break;
-      case 5:
-        if (!answers.mobilityAid) {
-          isValid = false;
-          newErrors.mobilityAid = 'Please make a selection';
-        }
-        break;
-      case 36:  // RankQuestion step
+      case 35:  // RankQuestion step
       if (answers.hasDragged === false) {
         isValid = false;
         newErrors.hasDragged = 'Please rank the options.';
@@ -557,40 +548,27 @@ const renderCurrentStep = () => {
               setSingleMobilityAid={setSingleMobilityAid} 
               errors= {errors}/>;
     case 5:
-      if (singleMobilityAid) {
-        nextStep(); // Skip here if only one mobility aid option
-        return null; 
-      }
-      return <Question4
+      return <Question5
               stepNumber={currentStep-1}
               nextStep={nextStep}
               previousStep={previousStep}
               answers={answers}
               handleChange={handleChange}
-              errors= {errors}
-            />;
-    case 6:
-      return <Question5 
-              stepNumber={currentStep-1} 
-              nextStep={nextStep} 
-              previousStep={previousStep} 
-              answers={answers} 
-              handleChange={handleChange}
-              singleMobilityAid={singleMobilityAid} 
+              singleMobilityAid={singleMobilityAid}
               errors= {errors}// Pass the skip state
              />;
-   case 7:
-      return <InstructionsPage1 
-              nextStep={nextStep} 
-              previousStep={previousStep} 
+   case 6:
+      return <InstructionsPage1
+              nextStep={nextStep}
+              previousStep={previousStep}
               answers={answers}
              />;
-   case 8:
+   case 7:
       return <InstructionsPage2
-              nextStep={nextStep} 
+              nextStep={nextStep}
               previousStep={previousStep}
              />;
-    case 36:
+    case 35:
       return <RankQuestion
               stepNumber={currentStep-3}
               nextStep={nextStep}
@@ -599,29 +577,29 @@ const renderCurrentStep = () => {
               updateAnswers={updateAnswers}
               errors= {errors}
             />
-    
-    case 37: 
+
+    case 36:
       if (answers.mobilityAidOptions.mobilityAidOptions.length === 1 ||  // if only one mobility aid option
         (answers.answeredMobilityAids && answers.answeredMobilityAids.length > 0) // if answered mobility aids exist
       ) {
         const remainingOptions = answers.mobilityAidOptions.mobilityAidOptions.filter(option => !answers.answeredMobilityAids.includes(option));
-        
+
         if(remainingOptions.length === 1) {
-          setCurrentStep(38);
+          setCurrentStep(37);
           setContinueUrl('');
           return null;
         }
-      } 
-      return <ContinuePage 
+      }
+      return <ContinuePage
               answers={answers}
               handleMobilityAidChange={handleMobilityAidChange}
-              previousStep={previousStep} 
+              previousStep={previousStep}
               yesStep={() => {setCurrentStep(MOBILITYAID_STEP);}}
               nextStep={nextStep}
               setContinueUrl={setContinueUrl}
               logData={logMobilityAidData}
               />;
-    case 38:
+    case 37:
       return <DemographicQuestions
               stepNumber={currentStep-3}
               answers={answers}
@@ -630,10 +608,10 @@ const renderCurrentStep = () => {
               previousStep={previousStep}
               errors={errors}
               />;
-    case 39:
-      return <EndingPage 
-              previousStep={previousStep} 
-              continueUrl={continueUrl} 
+    case 38:
+      return <EndingPage
+              previousStep={previousStep}
+              continueUrl={continueUrl}
               onSubmit={handleSubmit}
               onEmailLink={onEmailLink} />;
     default: return <WelcomePage onStart={startSurvey} />;
