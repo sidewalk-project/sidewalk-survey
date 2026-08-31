@@ -252,7 +252,7 @@ const ImageComparison = ({ stepNumber, answers, nextStep, previousStep, images, 
                     {`${stepNumber}. Pairwise comparison`}
                     <br />
                     <span>
-                        Which one do you think is a higher priority for infrastructure improvement?
+                        Which one do you think is a higher priority for improving accessibility?
                     </span>
                 </h2>
                 <p className="text-instruction text-center mb-4 text-gray-600">If you think they are of equivalent priority, please select 'the same'.</p>

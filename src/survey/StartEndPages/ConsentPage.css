@@ -1,0 +1,17 @@
+@page {
+  margin: 1in;
+}
+
+@media print {
+  /* Hide interactive controls that don't belong in a printed copy */
+  .consent-no-print {
+    display: none !important;
+  }
+
+  /* Avoid orphaning a heading from the text that follows it */
+  .consent-page h1,
+  .consent-page p b {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}

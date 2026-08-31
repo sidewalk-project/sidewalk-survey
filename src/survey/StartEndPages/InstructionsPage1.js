@@ -36,12 +36,12 @@ const InstructionsPage1 = ({ nextStep, previousStep, answers }) => {
       style={{ textAlign: 'left', fontSize: '0.7em', lineHeight: '1.3',  maxWidth: '60vw' }}
       > 
       <p tabIndex={0} className="mb-4">
-      <b>Evaluation of barriers for priority improvement.</b>
+      <b>Evaluation of barriers for priority accessibility improvement.</b>
       </p>
-      
+
       <p tabIndex={0} className="mb-4">
       In this section, we will show you images of potential sidewalk barriers.
-      We will ask your perceptions of whether the barriers are a priority for improvement.
+      We will ask your perceptions of whether the barriers are a priority for improving accessibility.
       </p>
 
       <p tabIndex={0} className="mb-4">
@@ -58,7 +58,7 @@ const InstructionsPage1 = ({ nextStep, previousStep, answers }) => {
       </p>
 
       <p tabIndex={0} className="mb-4">
-      <b>Is the barrier in this image a high priority for infrastructure improvement?</b>
+      <b>Is the barrier in this image a priority to address for improving accessibility?</b>
       </p>
       </div>
       <div className="mb-4 flex flex-col items-center">

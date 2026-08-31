@@ -7,7 +7,7 @@ import { HandsClapping } from 'phosphor-react';
 
 const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || 'surveyResponses';
 
-const BreakPage = ({ currentStep, onContinue, answers, completedGroups, onEmailLink }) => {
+const BreakPage = ({ currentStep, onContinue, answers, completedGroups, onEmailLink, setParentContinueUrl }) => {
   const [continueUrl, setContinueUrl] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -67,6 +67,9 @@ const BreakPage = ({ currentStep, onContinue, answers, completedGroups, onEmailL
 
       const resumeUrl = `${window.location.origin}/#/resume-survey/${docRef.id}`;
       setContinueUrl(resumeUrl);
+      if (setParentContinueUrl) {
+        setParentContinueUrl(resumeUrl);
+      }
     } catch (error) {
       console.error("Error saving document: ", error);
     }

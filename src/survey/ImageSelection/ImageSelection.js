@@ -138,7 +138,7 @@ const ImageSelection = ({ stepNumber, answers, nextStep, previousStep, images, o
                 <h2 className="text-left p-5 rounded mb-4"
                     tabIndex="0"
                     aria-live="assertive"
-                >{`${stepNumber}. Is the barrier in this image a high priority for infrastructure improvement?`}</h2>
+                >{`${stepNumber}. Is the barrier in this image a priority to address for improving accessibility?`}</h2>
                 <div className="image-and-selection-buttons">
                     {currentIndex < images.length ? (
                         <div className="selection-image-wrapper">

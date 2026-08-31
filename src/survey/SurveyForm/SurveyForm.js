@@ -13,13 +13,13 @@ import DemographicQuestions from '../Questions/DemographicQuestions';
 import ImageSelection from '../ImageSelection/ImageSelection';
 import ImageComparison from '../ImageComaprison/ImageComparison';
 import IntroPage from '../StartEndPages/IntroPage';
+import ConsentPage from '../StartEndPages/ConsentPage';
 import WelcomePage from '../StartEndPages/WelcomePage'; 
 import EndingPage from '../StartEndPages/EndingPage';
 import ContinuePage from '../Questions/ContinuePage';
 import BreakPage from '../StartEndPages/BreakPage';
 import MobileWarningModal from '../StartEndPages/MobileWarningModal';
 import InstructionsPage1 from '../StartEndPages/InstructionsPage1';
-import InstructionsPage2 from '../StartEndPages/InstructionsPage2';
 import { v4 as uuidv4 } from 'uuid';
 import RankQuestion from '../Questions/RankQuestion';
 import cropsData from '../CropsData/cropsData';
@@ -46,7 +46,7 @@ const analytics = getAnalytics(app);
 const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || 'surveyResponses';
 
 const TOTAL_STEPS = 38;
-const MOBILITYAID_STEP = 5;
+const MOBILITYAID_STEP = 6;
 const IMAGE_STEP = 8;
 const STEPS_PER_GROUP = 3;
 const GROUP_ORDER = ['group0', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8'];
@@ -373,13 +373,13 @@ const previousStep = () => {
     let newErrors = {};
 
     switch (currentStep) {
-      case 2:
+      case 3:
         if (!answers.name) {
           isValid = false;
           newErrors.name = 'Please fill this in';
         }
         break;
-      case 3:
+      case 4:
         if (!answers.email) {
           isValid = false;
           newErrors.email = 'Please fill this in';
@@ -390,9 +390,9 @@ const previousStep = () => {
             newErrors.email = 'Please enter a valid email address';
           }
         }
-        
+
         break;
-      case 4:
+      case 5:
         if (!answers.mobilityAidOptions || answers.mobilityAidOptions.mobilityAidOptions.length === 0) {
           isValid = false;
           newErrors.mobilityAidOptions = 'Please select at least one option';
@@ -520,36 +520,40 @@ const renderCurrentStep = () => {
 
   switch (currentStep) {
     case 1:
-      return <IntroPage 
+      return <IntroPage
               nextStep={nextStep}
               />;
     case 2:
-      return <Question1 
-              stepNumber={currentStep-1} 
-              previousStep={previousStep} 
-              nextStep={nextStep} 
-              handleChange={handleChange}
-              errors= {errors} 
+      return <ConsentPage
+              nextStep={nextStep}
               />;
     case 3:
-      return <Question2 
-              stepNumber={currentStep-1} 
-              nextStep={nextStep} 
-              previousStep={previousStep} 
+      return <Question1
+              stepNumber={currentStep-2}
+              previousStep={previousStep}
+              nextStep={nextStep}
               handleChange={handleChange}
-              errors= {errors} 
+              errors= {errors}
               />;
     case 4:
-      return <Question3 
-              stepNumber={currentStep-1} 
-              nextStep={nextStep} 
-              previousStep={previousStep} 
-              updateAnswers={updateAnswers}
-              setSingleMobilityAid={setSingleMobilityAid} 
-              errors= {errors}/>;
+      return <Question2
+              stepNumber={currentStep-2}
+              nextStep={nextStep}
+              previousStep={previousStep}
+              handleChange={handleChange}
+              errors= {errors}
+              />;
     case 5:
+      return <Question3
+              stepNumber={currentStep-2}
+              nextStep={nextStep}
+              previousStep={previousStep}
+              updateAnswers={updateAnswers}
+              setSingleMobilityAid={setSingleMobilityAid}
+              errors= {errors}/>;
+    case 6:
       return <Question5
-              stepNumber={currentStep-1}
+              stepNumber={currentStep-2}
               nextStep={nextStep}
               previousStep={previousStep}
               answers={answers}
@@ -557,16 +561,11 @@ const renderCurrentStep = () => {
               singleMobilityAid={singleMobilityAid}
               errors= {errors}// Pass the skip state
              />;
-   case 6:
+   case 7:
       return <InstructionsPage1
               nextStep={nextStep}
               previousStep={previousStep}
               answers={answers}
-             />;
-   case 7:
-      return <InstructionsPage2
-              nextStep={nextStep}
-              previousStep={previousStep}
              />;
     case 35:
       return <RankQuestion
@@ -780,18 +779,19 @@ return (
   <div>
      {showMobileWarning && <MobileWarningModal onClose={() => setShowMobileWarning(false)} />}
     {currentStep > 0 && (
-      <div style={{ position: 'fixed', top: 0, width: '100%', left:-4}}>
+      <div className="app-progress-bar" style={{ position: 'fixed', top: 0, width: '100%', left:-4}}>
         <Progress value={progressValue} color="teal" size="sm"/>
       </div>
     )}
     {renderCurrentStep()}
     {showBreakOverlay && (
-        <BreakPage 
+        <BreakPage
           currentStep={currentStep}
-          onContinue={closeBreakOverlay} 
+          onContinue={closeBreakOverlay}
           answers={answers}
           completedGroups={calculateCompletedGroups}
           onEmailLink={onEmailLink}
+          setParentContinueUrl={setContinueUrl}
         />
       )}
   </div>
