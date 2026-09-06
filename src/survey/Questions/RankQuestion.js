@@ -40,7 +40,7 @@ const RankQuestion = ({ stepNumber, nextStep, previousStep, updateAnswers, error
     
     return (
       <DraggableQuestion
-        questionText={<span>{stepNumber}. Please rank the following barriers based on how much of a priority they are for improvements for people with mobility disabilities, with 1 being the lowest priority and {rankedOptions.length} being the highest.*</span>}
+        questionText={<span>{stepNumber}. Please rank the following barriers based on how much of a priority they are for improvements for people with mobility disabilities, with 1 being the highest priority and {rankedOptions.length} being the lowest.*</span>}
         inputId="rankedOptions" 
         instructionText="Drag and drop the options to rank them. You may click on the image icon to see an example."
         options={rankedOptions}

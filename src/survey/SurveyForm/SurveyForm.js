@@ -16,7 +16,6 @@ import IntroPage from '../StartEndPages/IntroPage';
 import ConsentPage from '../StartEndPages/ConsentPage';
 import WelcomePage from '../StartEndPages/WelcomePage'; 
 import EndingPage from '../StartEndPages/EndingPage';
-import ContinuePage from '../Questions/ContinuePage';
 import BreakPage from '../StartEndPages/BreakPage';
 import MobileWarningModal from '../StartEndPages/MobileWarningModal';
 import InstructionsPage1 from '../StartEndPages/InstructionsPage1';
@@ -45,7 +44,7 @@ const analytics = getAnalytics(app);
 
 const COLLECTION_NAME = process.env.REACT_APP_COLLECTION_NAME || 'surveyResponses';
 
-const TOTAL_STEPS = 38;
+const TOTAL_STEPS = 37;
 const MOBILITYAID_STEP = 6;
 const IMAGE_STEP = 8;
 const STEPS_PER_GROUP = 3;
@@ -578,27 +577,6 @@ const renderCurrentStep = () => {
             />
 
     case 36:
-      if (answers.mobilityAidOptions.mobilityAidOptions.length === 1 ||  // if only one mobility aid option
-        (answers.answeredMobilityAids && answers.answeredMobilityAids.length > 0) // if answered mobility aids exist
-      ) {
-        const remainingOptions = answers.mobilityAidOptions.mobilityAidOptions.filter(option => !answers.answeredMobilityAids.includes(option));
-
-        if(remainingOptions.length === 1) {
-          setCurrentStep(37);
-          setContinueUrl('');
-          return null;
-        }
-      }
-      return <ContinuePage
-              answers={answers}
-              handleMobilityAidChange={handleMobilityAidChange}
-              previousStep={previousStep}
-              yesStep={() => {setCurrentStep(MOBILITYAID_STEP);}}
-              nextStep={nextStep}
-              setContinueUrl={setContinueUrl}
-              logData={logMobilityAidData}
-              />;
-    case 37:
       return <DemographicQuestions
               stepNumber={currentStep-3}
               answers={answers}
@@ -607,7 +585,7 @@ const renderCurrentStep = () => {
               previousStep={previousStep}
               errors={errors}
               />;
-    case 38:
+    case 37:
       return <EndingPage
               previousStep={previousStep}
               continueUrl={continueUrl}

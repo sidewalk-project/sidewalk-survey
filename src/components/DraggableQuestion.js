@@ -61,8 +61,8 @@ const DraggableQuestion = ({ questionText, inputId, instructionText, options, ha
         <div className="draggable-options-and-legend">
           <div className="draggable-legend">
             <div className="legend-labels">
-              <span id="difficult">difficult</span>
-              <span id="easy">easy</span>
+              <span id="difficult">highest</span>
+              <span id="easy">lowest</span>
             </div>
             <div className='gradient-line'></div>
           </div> 
