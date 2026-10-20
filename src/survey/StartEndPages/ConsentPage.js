@@ -68,12 +68,12 @@ const ConsentPage = ({ nextStep }) => {
 
       <p className="mb-1" tabIndex={0}><b>Why am I being asked to participate in this study?</b></p>
       <p className="mb-4" tabIndex={0}>
-        You are being asked to participate in this research study because you were identified as an individual 18 years of age or older, actively acting as an urban planning professional with experience in urban planning, transportation, public works, or ADA coordination or transition planning.
+        You are being asked to participate in this research study because you were identified as an individual 18 years of age or older, able to view and interpret images independently, actively acting as an urban planning professional with experience in urban planning, transportation, public works, or ADA coordination or transition planning.
       </p>
 
       <p className="mb-1" tabIndex={0}><b>What will I be asked to do during this study?</b></p>
       <p className="mb-2" tabIndex={0}>
-        You will be asked to complete a 30-minute digital activity using the Perceptions of Severity survey platform. This interactive tool presents images of sidewalk barriers commonly encountered by people with mobility disabilities. You will be asked to indicate your familiarity with accessibility issues in pedestrian spaces, and evaluate a series of individual images of barriers by rating and ranking their priority for barrier removal. You will also be asked for the following information:
+        You will be asked to complete a 20-30-minute digital activity using the Perceptions of Severity survey platform. This interactive tool presents images of sidewalk barriers commonly encountered by people with mobility disabilities. You will be asked to indicate your familiarity with accessibility issues in pedestrian spaces, and evaluate a series of individual images of barriers by rating and ranking their priority for barrier removal. You will also be asked for the following information:
       </p>
       <ul className="mb-4" style={{ listStyleType: 'disc', paddingLeft: '1.5em' }} tabIndex={0}>
         <li>Full name</li>
